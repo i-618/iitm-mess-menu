@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Menu - Food Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script>
+        // Anti-debugging and security measures
+        (function() {
+            'use strict';
+            
+            // Disable right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            // Disable F12, Ctrl+Shift+I, Ctrl+U
+            document.addEventListener('keydown', function(e) {
+                if (e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 73) ||
+                    (e.ctrlKey && e.keyCode === 85)) {
+                    e.preventDefault();
+                }
+            });
+            
+            // Basic domain protection (optional - uncomment and set your domain)
+            /*
+            const allowedDomains = ['yourdomain.com', 'localhost'];
+            const currentDomain = window.location.hostname;
+            
+            if (!allowedDomains.includes(currentDomain)) {
+                document.body.innerHTML = '<h1>Access Denied</h1>';
+                return;
+            }
+            */
+        })();
+    </script>
+    
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-utensils"></i> Mess Menu</h1>
+                <div class="date-info">
+                    <p class="current-date">{{ getFormattedDate(selectedDate) }}</p>
+                    <div class="week-badge">
+                        <div class="week-letter">{{ getWeekOfMonth(selectedDate).letter }}</div>
+                        <div class="week-details">
+                            <span class="week-text">Week {{ getWeekOfMonth(selectedDate).number }}</span>
+                            <span class="month-text">{{ getWeekOfMonth(selectedDate).monthName }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls-container">
+                    <div class="date-selector">
+                        <label for="date-select"><i class="fas fa-calendar-alt"></i> Select Date:</label>
+                        <input type="date" id="date-select" v-model="selectedDate">
+                    </div>
+                    
+                    <div class="meal-type-selector">
+                        <label for="meal-select"><i class="fas fa-clock"></i> Show Meal:</label>
+                        <select id="meal-select" v-model="selectedMealType">
+                            <option value="">All Meals</option>
+                            <option value="BREAKFAST">Breakfast</option>
+                            <option value="LUNCH">Lunch</option>
+                            <option value="DINNER">Dinner</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div v-if="loading" class="loading-indicator">
+                    <i class="fas fa-spinner fa-spin"></i> Loading menus...
+                </div>
+                <div v-if="error" class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i> {{ error }}
+                </div>
+            </div>
+        </header>
+        
+        <menu-display 
+            :all-menus="allMenus" 
+            :vendors="sortedVendors" 
+            :selected-date="selectedDate"
+            :selected-meal-type="selectedMealType">
+        </menu-display>
+    </div>
+
+    <script src="js/components/MenuDisplay.js"></script>
+    <script src="js/app-protected.js"></script>
+</body>
+</html>
