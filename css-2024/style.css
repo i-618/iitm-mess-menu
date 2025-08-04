@@ -1,0 +1,453 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+.header-content h1 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.header-content h1 i {
+  color: #e74c3c;
+  margin-right: 15px;
+}
+
+.date-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.current-date {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+.week-badge {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 12px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.week-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.week-letter {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.week-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.week-text {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.month-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.date-selector, .meal-type-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-selector label, .meal-type-selector label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+input[type="date"], select {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 3px solid #ecf0f1;
+  border-radius: 50px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  font-weight: 500;
+}
+
+input[type="date"]:focus, select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+.loading-indicator {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 50px;
+  margin: 15px 0;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.error-message {
+  background: linear-gradient(135deg, #fd79a8, #e84393);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 50px;
+  margin: 15px 0;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.menu-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+.welcome-screen {
+  text-align: center;
+  padding: 60px 40px;
+  color: #7f8c8d;
+}
+
+.welcome-screen i {
+  color: #bdc3c7;
+  margin-bottom: 20px;
+}
+
+.welcome-screen h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+/* All Menus Grid Layout */
+.all-menus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+}
+
+.vendor-menu-section {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.vendor-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.vendor-header h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.vendor-header h2 i {
+  color: #e74c3c;
+  margin-right: 10px;
+}
+
+.menu-subtitle {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+}
+
+.no-menu {
+  text-align: center;
+  padding: 40px 20px;
+  color: #7f8c8d;
+}
+
+.no-menu i {
+  color: #bdc3c7;
+  margin-bottom: 15px;
+}
+
+.menu-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.meal-card {
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.meal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--meal-accent);
+}
+
+.meal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.breakfast-card {
+  --meal-accent: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+  background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+  color: #2d3436;
+}
+
+.lunch-card {
+  --meal-accent: linear-gradient(135deg, #81ecec, #74b9ff);
+  background: linear-gradient(135deg, #81ecec, #74b9ff);
+  color: #2d3436;
+}
+
+.dinner-card {
+  --meal-accent: linear-gradient(135deg, #fd79a8, #fdcb6e);
+  background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+  color: #2d3436;
+}
+
+.meal-header {
+  text-align: center;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.meal-header i {
+  font-size: 1.3rem;
+}
+
+.meal-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.meal-items {
+  display: grid;
+  gap: 8px;
+}
+
+.meal-item {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.meal-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateX(3px);
+}
+
+.meal-item i {
+  color: #27ae60;
+  font-size: 0.8rem;
+}
+
+.meal-item span {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.no-items {
+  text-align: center;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .all-menus-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding: 15px;
+  }
+  
+  header {
+    padding: 30px 20px;
+  }
+  
+  .header-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .controls-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .all-menus-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .vendor-menu-section {
+    padding: 20px;
+  }
+  
+  input[type="date"], select {
+    min-width: 200px;
+  }
+  
+  .date-info {
+    gap: 12px;
+  }
+  
+  .current-date {
+    font-size: 1.1rem;
+  }
+  
+  .week-badge {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+  
+  .week-letter {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+  
+  .week-text {
+    font-size: 0.9rem;
+  }
+  
+  .month-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .vendor-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .meal-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .date-info {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .week-badge {
+    padding: 8px 14px;
+    gap: 10px;
+  }
+  
+  .week-letter {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+  
+  .week-text {
+    font-size: 0.85rem;
+  }
+  
+  .month-text {
+    font-size: 0.75rem;
+  }
+}
