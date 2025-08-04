@@ -1,5 +1,7 @@
+/* Reset and Base Styles */
 html, body {
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -13,42 +15,57 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: #333;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
+/* Header Styles - Mobile First */
 header {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px 0;
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 3px solid #667eea;
 }
 
 .header-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 1rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+    gap: 1rem;
 }
 
 h1 {
     color: #4a5568;
-    font-size: 2.2rem;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.75rem;
+    text-align: center;
+    word-break: break-word;
 }
 
+h1 i {
+    color: #e74c3c;
+    font-size: 1.2em;
+}
+
+/* Navigation - Mobile Optimized */
 .month-navigation {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .nav-btn {
@@ -56,71 +73,110 @@ h1 {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 1.1rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.nav-btn:hover {
+.nav-btn:hover,
+.nav-btn:focus {
     background: #5a67d8;
     transform: scale(1.1);
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
 }
 
 .current-month {
     color: #4a5568;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3.5vw, 1.5rem);
     font-weight: 600;
     margin: 0;
+    text-align: center;
+    flex: 1;
     min-width: 200px;
+}
+
+/* Meal Filter - Mobile First */
+.meal-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.meal-filter > label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     text-align: center;
 }
 
-.meal-filter {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.meal-filter label {
-    font-weight: 600;
-    color: #4a5568;
-}
-
 .meal-checkboxes {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 600px;
+    justify-content: center;
 }
 
 .checkbox-label {
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 0.5rem;
     cursor: pointer;
     font-weight: normal;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    min-height: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.checkbox-label:hover {
+.checkbox-label:hover,
+.checkbox-label:focus-within {
+    background: rgba(255, 255, 255, 1);
     color: #667eea;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .checkbox-label input[type="checkbox"] {
     cursor: pointer;
+    transform: scale(1.2);
+    margin: 0;
 }
 
-.loading-indicator, .error-message {
+/* Loading and Error States */
+.loading-indicator, 
+.error-message {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 15px;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
     border-radius: 8px;
     font-weight: 500;
+    margin: 0.5rem;
+    text-align: center;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 .loading-indicator {
@@ -133,25 +189,27 @@ h1 {
     color: #742a2a;
 }
 
+/* Main Calendar Container */
 .calendar-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 1rem;
     overflow: visible;
 }
 
 .calendar {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    padding: 30px;
+    padding: 1.5rem;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     overflow: visible;
+    margin-bottom: 1rem;
 }
 
 .calendar-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 .week-info {
@@ -163,26 +221,30 @@ h1 {
 .week-indicator {
     background: #667eea;
     color: white;
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
+/* Calendar Grid - Mobile Optimized */
 .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
+    background: #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .weekday {
     background: #f7fafc;
-    padding: 15px;
+    padding: clamp(0.5rem, 2vw, 1rem);
     text-align: center;
     font-weight: 600;
     color: #4a5568;
-    border-radius: 8px;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
 }
 
 .calendar-grid {
@@ -196,18 +258,26 @@ h1 {
 
 .calendar-date {
     background: white;
-    min-height: 120px;
-    padding: 12px;
+    min-height: clamp(60px, 15vw, 120px);
+    padding: clamp(0.25rem, 2vw, 0.75rem);
     display: flex;
     flex-direction: column;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .calendar-date:hover {
     background: #f7fafc;
     transform: scale(1.02);
+}
+
+.calendar-date:focus {
+    outline: 2px solid #4299e1;
+    outline-offset: 2px;
+    z-index: 5;
 }
 
 .calendar-date.other-month {
@@ -230,136 +300,154 @@ h1 {
     position: relative;
 }
 
-.calendar-date:focus {
-    outline: 2px solid #4299e1;
-    outline-offset: 2px;
+.calendar-date.today.selected {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
 }
 
 .calendar-date.has-menu {
     border-left: 4px solid #48bb78;
 }
 
+.calendar-date.has-menu.selected {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+}
+
 .date-number {
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 0.25rem;
 }
 
 .week-label {
-    font-size: 0.8rem;
+    font-size: clamp(0.6rem, 1.8vw, 0.8rem);
     color: #667eea;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.selected .week-label {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .meal-indicators {
     display: flex;
-    gap: 3px;
+    gap: 2px;
     flex-wrap: wrap;
+    justify-content: center;
     margin-top: auto;
 }
 
 .meal-dot {
-    width: 8px;
-    height: 8px;
+    width: clamp(4px, 1.5vw, 8px);
+    height: clamp(4px, 1.5vw, 8px);
     border-radius: 50%;
     opacity: 0.8;
+    flex-shrink: 0;
 }
 
-.meal-dot.breakfast {
-    background: #f56565;
-}
+.meal-dot.breakfast { background: #f56565; }
+.meal-dot.lunch { background: #48bb78; }
+.meal-dot.snacks { background: #ed8936; }
+.meal-dot.dinner { background: #4299e1; }
 
-.meal-dot.lunch {
-    background: #48bb78;
-}
-
-.meal-dot.snacks {
-    background: #ed8936;
-}
-
-.meal-dot.dinner {
-    background: #4299e1;
-}
-
+/* Selected Date Menu - Mobile Optimized */
 .selected-date-menu {
-    margin-top: 30px;
-    padding: 25px;
-    background: #f7fafc;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 16px;
-    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .selected-date-menu h3 {
     color: #2d3748;
-    font-size: 1.4rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    margin-bottom: 1.5rem;
     text-align: center;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
 }
 
 .day-menu-card {
     background: white;
     border-radius: 12px;
-    padding: 20px;
+    padding: 1.25rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .meals-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
 }
 
 .meal-section {
     border-radius: 12px;
-    padding: 15px;
+    padding: 1rem;
     transition: all 0.3s ease;
+    border-left: 4px solid;
+}
+
+.meal-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .meal-section.breakfast {
     background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
-    border-left: 4px solid #f56565;
+    border-left-color: #f56565;
 }
 
 .meal-section.lunch {
     background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
-    border-left: 4px solid #48bb78;
+    border-left-color: #48bb78;
 }
 
 .meal-section.snacks {
     background: linear-gradient(135deg, #fffaf0 0%, #fbd38d 100%);
-    border-left: 4px solid #ed8936;
+    border-left-color: #ed8936;
 }
 
 .meal-section.dinner {
     background: linear-gradient(135deg, #f7fafc 0%, #cbd5e0 100%);
-    border-left: 4px solid #4299e1;
+    border-left-color: #4299e1;
 }
 
 .meal-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
 }
+
+.meal-header i {
+    font-size: 1.2rem;
+}
+
+.breakfast .meal-header i { color: #f56565; }
+.lunch .meal-header i { color: #48bb78; }
+.snacks .meal-header i { color: #ed8936; }
+.dinner .meal-header i { color: #4299e1; }
 
 .meal-name {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     color: #2d3748;
 }
 
 .food-items {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .food-item {
     background: rgba(255, 255, 255, 0.7);
-    padding: 10px 14px;
+    padding: 0.75rem;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     color: #4a5568;
     border-left: 3px solid rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
@@ -368,41 +456,53 @@ h1 {
 .food-item:hover {
     background: rgba(255, 255, 255, 0.9);
     transform: translateX(3px);
+    border-left-color: #667eea;
 }
 
+/* No Menu Message */
 .no-menu-message {
     text-align: center;
-    padding: 40px;
+    padding: 2rem;
     color: #718096;
-    font-size: 1.1rem;
-    margin-top: 30px;
-    background: #f7fafc;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    margin-top: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .no-menu-message i {
     font-size: 2rem;
-    margin-bottom: 10px;
+    margin-bottom: 0.75rem;
     display: block;
+    color: #a0aec0;
 }
 
-/* Prevent arrow key scrolling on the main app */
+/* Keyboard Instructions - Mobile Hidden */
+.keyboard-instructions {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    z-index: 1000;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    display: none;
+}
+
+.keyboard-instructions:hover {
+    opacity: 1;
+}
+
+/* Focus Management */
 #app {
     outline: none;
 }
 
-/* Ensure smooth date selection without scrolling */
-.calendar-date.selected {
-    background: linear-gradient(135deg, #e6f3ff 0%, #4299e1 100%);
-    color: white;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-    transform: scale(1.05);
-    z-index: 10;
-    position: relative;
-}
-
-/* Remove any scroll behavior from the calendar container */
 .calendar-container {
     overflow: visible;
 }
@@ -411,79 +511,88 @@ h1 {
     overflow: visible;
 }
 
-/* Ensure calendar grid doesn't cause overflow */
 .calendar-grid {
     overflow: visible;
 }
 
-/* Keyboard navigation instructions */
-.keyboard-instructions {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    z-index: 1000;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
+/* Mobile Responsive Breakpoints */
 
-.keyboard-instructions:hover {
-    opacity: 1;
-}
-
+/* Large Mobile / Small Tablet: 768px and below */
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column;
-        text-align: center;
+        padding: 0 0.75rem;
+        gap: 0.75rem;
     }
     
     .meal-checkboxes {
-        justify-content: center;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.4rem;
+        max-width: 400px;
     }
     
-    h1 {
-        font-size: 1.8rem;
+    .calendar {
+        padding: 1rem;
+        border-radius: 16px;
     }
     
-    .current-month {
-        font-size: 1.3rem;
-        min-width: auto;
-    }
-    
-    .calendar-date {
-        min-height: 80px;
-        padding: 8px;
-    }
-    
-    .date-number {
-        font-size: 1rem;
-    }
-    
-    .week-label {
-        font-size: 0.7rem;
+    .calendar-container {
+        padding: 0.75rem;
     }
     
     .meals-container {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
     
-    .calendar {
-        padding: 20px;
+    .selected-date-menu {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .keyboard-instructions {
+        display: none;
     }
 }
 
+/* Standard Mobile: 480px and below */
 @media (max-width: 480px) {
-    .calendar-date {
-        min-height: 60px;
-        padding: 6px;
+    .header-content {
+        padding: 0 0.5rem;
     }
     
-    .date-number {
-        font-size: 0.9rem;
+    .month-navigation {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .nav-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+    
+    .meal-checkboxes {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+    }
+    
+    .checkbox-label {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .calendar {
+        padding: 0.75rem;
+        border-radius: 12px;
+    }
+    
+    .calendar-container {
+        padding: 0.5rem;
+    }
+    
+    .calendar-date {
+        min-height: 50px;
+        padding: 0.2rem;
     }
     
     .week-label {
@@ -491,11 +600,184 @@ h1 {
     }
     
     .meal-indicators {
-        gap: 2px;
+        gap: 1px;
     }
     
     .meal-dot {
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
+    }
+    
+    .selected-date-menu {
+        padding: 0.75rem;
+        border-radius: 12px;
+    }
+    
+    .day-menu-card {
+        padding: 1rem;
+    }
+}
+
+/* Small Mobile: 360px and below */
+@media (max-width: 360px) {
+    .header-content {
+        padding: 0 0.25rem;
+    }
+    
+    .calendar-date {
+        min-height: 45px;
+        padding: 0.15rem;
+    }
+    
+    .date-number {
+        font-size: 0.75rem;
+    }
+    
+    .meal-dot {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .meal-checkboxes {
+        max-width: 240px;
+    }
+    
+    .checkbox-label {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        min-height: 44px;
+    }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+    }
+    
+    .month-navigation {
+        flex-direction: row;
+    }
+    
+    .meal-filter {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    
+    .meal-checkboxes {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 500px;
+    }
+    
+    .calendar-date {
+        min-height: 40px;
+    }
+    
+    .meals-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .selected-date-menu {
+        margin-top: 0.75rem;
+    }
+}
+
+/* Desktop: Show keyboard instructions */
+@media (min-width: 769px) {
+    .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .meal-filter {
+        flex-direction: row;
+        margin-top: 0;
+    }
+    
+    .keyboard-instructions {
+        display: block;
+    }
+}
+
+/* High DPI Display Optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .meal-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    @media (max-width: 480px) {
+        .meal-dot {
+            width: 6px;
+            height: 6px;
+        }
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .calendar-date:hover {
+        transform: none;
+    }
+    
+    .nav-btn:hover {
+        transform: none;
+    }
+}
+
+/* Touch Device Optimization */
+@media (pointer: coarse) {
+    .calendar-date {
+        min-height: 60px;
+    }
+    
+    .nav-btn {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    .checkbox-label {
+        min-height: 48px;
+        padding: 0.75rem;
+    }
+    
+    /* Increase touch targets */
+    .meal-dot {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .keyboard-instructions,
+    .nav-btn {
+        display: none;
+    }
+    
+    .calendar,
+    .selected-date-menu {
+        box-shadow: none;
+        border: 1px solid #ddd;
     }
 }
